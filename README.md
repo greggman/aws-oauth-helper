@@ -1,7 +1,7 @@
 # aws-oauth-helper
 An AWS Lambda function to handle the oauth client secret part of oauth
 
-If you look through [the OAuth flow](), at last for Github and I guess I'm assuming the rest are the same
+If you look through [the OAuth flow](https://docs.github.com/en/free-pro-team@latest/developers/apps/authorizing-oauth-apps#web-application-flow), at last for Github and I guess I'm assuming the rest are the same
 then you'll see it works like this
 
 1. User clicks some login button on your webpage
