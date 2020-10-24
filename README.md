@@ -35,7 +35,23 @@ then you'll see it works like this
 2. Find AWS Lambda
 3. Create a Function
 4. In the code area for index.js past the contents of [aws-oauth-helper.js](https://github.com/greggman/aws-oauth-helper/blob/main/aws-oauth-helper.js). The click "Deploy"
-5. Scroll down and where it says environment variables add a key in the form `c_<client_id>` where `client_id` is given to you by github when you [registered your app](https://github.com/settings/developers). Not the `c_` before the rest of the id. This is because ids can start with a number so we add the prefix `c_`. For the value paste in the secret key, also given to you when you registered your app.
+5. Scroll down and where it says environment variables add a key in the form `c_<client_id>` where `client_id` is given to you by github when you [registered your app](https://github.com/settings/developers). Not the `c_` before the rest of the id. This is because ids can start with a number so we add the prefix `c_`. For the value paste in the secret key, also given to you when you registered your app. Also add another variable, key `e_<client_id>` and value is the endpoint for getting the access token from the service. In the case of github it's `https://github.com/login/oauth/access_token`. In other words
+
+   ```
+   key               value
+   ---------------+------------------
+   c_<client_id>  |  <client_secret>
+   e_<client_id>  |  <endpoint>
+   ```
+   
+   Mine look something like this
+   
+   ```
+   c_34093c3c2eeb4dc7fd0f  3eb4d4093c3c2ec7fd0f3c2eeb4dc7fd0f34093c
+   e_34093c3c2eeb4dc7fd0f  https://github.com/login/oauth/access_token
+   ```
+
+
 6. Back at the top you'll see a "Designer" diagram. Click the "Add Triggers" button
 7. Select the API Gateway as a trigger
 8. Create an API, REST API, Security: Open and click Add
@@ -48,7 +64,7 @@ then you'll see it works like this
 
     ```
     // some async function
-    const url = `${urlFromAWSPanel}?code=${codeFromGithubStep4Above}&clientId=${clientIdFromGithub}&endPoint=${encodeURIComponent('https://github.com/login/oauth/access_token')}`;
+    const url = `${urlFromAWSPanel}?code=${codeFromGithubStep4Above}&clientId=${clientIdFromGithub}`;
     const req = await fetch(url);
     const data = await req.json();
     if (data.access_token) {
