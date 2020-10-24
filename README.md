@@ -1,5 +1,5 @@
 # aws-oauth-helper
-An AWS Lambda function to handle the oauth client secret part of oauth
+An AWS Lambda function to handle the oauth client secret part of oauth so that your webpage can allow users to login to oauth services.
 
 If you look through [the OAuth flow](https://docs.github.com/en/free-pro-team@latest/developers/apps/authorizing-oauth-apps#web-application-flow), at last for Github and I guess I'm assuming the rest are the same
 then you'll see it works like this
@@ -32,7 +32,7 @@ then you'll see it works like this
 # How to use
 
 1. Create an AWS account
-2. Find ASW Lambda
+2. Find AWS Lambda
 3. Create a Function
 4. In the code area for index.js past the contents of [aws-oauth-helper.js](https://github.com/greggman/aws-oauth-helper/blob/main/aws-oauth-helper.js). The click "Deploy"
 5. Scroll down and where it says environment variables add a key in the form `c_<client_id>` where `client_id` is given to you by github when you [registered your app](https://github.com/settings/developers). Not the `c_` before the rest of the id. This is because ids can start with a number so we add the prefix `c_`. For the value paste in the secret key, also given to you when you registered your app.
@@ -57,6 +57,8 @@ then you'll see it works like this
        // failure. 
     }
     ```
+    
+Note that most likely it would be good for you to register a domain name and then in the AWS API Gateway register some subdomain as a custom domain name for your API. That way instead of have to fetch to something like `https://30923eifjifj.execute-api.us-east2.amazonaws.com/default` you could use `https://myapi.mycustomdomain.com/api-name`
     
 # License: MIT
 
