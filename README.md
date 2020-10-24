@@ -58,3 +58,8 @@ then you'll see it works like this
     }
     ```
     
+# License: MIT
+
+# Thanks:
+
+Thanks to https://github.com/HenrikJoreteg/github-secret-keeper which made it clear how simple this could be.
