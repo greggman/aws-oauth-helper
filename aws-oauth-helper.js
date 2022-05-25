@@ -70,6 +70,7 @@ exports.handler = async (event, context) => {
       ...(redirectUri && {redirect_uri: redirectUri}),
     };
   
+    const endPoint = process.env[`e_${client}`];
     let url;  
     try {
       url = new URL(endPoint);
