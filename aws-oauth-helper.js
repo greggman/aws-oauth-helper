@@ -45,7 +45,6 @@ exports.handler = async (event, context) => {
     client,
     redirectUri,
     state,
-    endPoint,
   } = event.queryStringParameters;
   const corsHeaders = {
     "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
@@ -57,6 +56,14 @@ exports.handler = async (event, context) => {
       statusCode: 400,
       //  ${Object.entries(process.env).map(([k, v]) => `${k}=${v}`)}
       body: JSON.stringify({message: `No secret is configured for client ID: ${client}`}),
+      headers: corsHeaders,
+    };
+  }
+  const endPoint = process.env[`e_${client}`];
+  if (!endPoint) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({message: `No endpoint is configured for client ID: ${client}`}),
       headers: corsHeaders,
     };
   }
